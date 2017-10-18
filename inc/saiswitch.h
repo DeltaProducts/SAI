@@ -15,7 +15,7 @@
  *
  *    Microsoft would like to thank the following companies for their review and
  *    assistance with these files: Intel Corporation, Mellanox Technologies Ltd,
- *    Dell Products, L.P., Facebook, Inc
+ *    Dell Products, L.P., Facebook, Inc., Marvell International Ltd.
  *
  * @file    saiswitch.h
  *
@@ -236,12 +236,23 @@ typedef enum _sai_switch_attr_t
     SAI_SWITCH_ATTR_START,
 
     /**
-     * @brief The number of ports on the switch
+     * @brief Number of active(created) ports on the switch
      *
      * @type sai_uint32_t
      * @flags READ_ONLY
      */
-    SAI_SWITCH_ATTR_PORT_NUMBER = SAI_SWITCH_ATTR_START,
+    SAI_SWITCH_ATTR_NUMBER_OF_ACTIVE_PORTS = SAI_SWITCH_ATTR_START,
+
+    /** @ignore - for backward compatibility */
+    SAI_SWITCH_ATTR_PORT_NUMBER = SAI_SWITCH_ATTR_NUMBER_OF_ACTIVE_PORTS,
+
+    /**
+     * @brief Maximum number of supported ports on the switch
+     *
+     * @type sai_uint32_t
+     * @flags READ_ONLY
+     */
+    SAI_SWITCH_ATTR_MAX_NUMBER_OF_SUPPORTED_PORTS,
 
     /**
      * @brief Get the port list
@@ -683,6 +694,14 @@ typedef enum _sai_switch_attr_t
     SAI_SWITCH_ATTR_AVAILABLE_IPV6_NEIGHBOR_ENTRY,
 
     /**
+     * @brief Available Next hop group entries
+     *
+     * @type sai_uint32_t
+     * @flags READ_ONLY
+     */
+    SAI_SWITCH_ATTR_AVAILABLE_NEXT_HOP_GROUP_ENTRY,
+
+    /**
      * @brief Available Next hop group member entries
      *
      * @type sai_uint32_t
@@ -713,6 +732,22 @@ typedef enum _sai_switch_attr_t
      * @flags READ_ONLY
      */
     SAI_SWITCH_ATTR_AVAILABLE_IPMC_ENTRY,
+
+    /**
+     * @brief Available ACL Tables
+     *
+     * @type sai_uint32_t
+     * @flags READ_ONLY
+     */
+    SAI_SWITCH_ATTR_AVAILABLE_ACL_TABLE,
+
+    /**
+     * @brief Available ACL Table groups
+     *
+     * @type sai_uint32_t
+     * @flags READ_ONLY
+     */
+    SAI_SWITCH_ATTR_AVAILABLE_ACL_TABLE_GROUP,
 
     /**
      * @brief Default trap group
@@ -922,7 +957,7 @@ typedef enum _sai_switch_attr_t
      *
      * @type sai_packet_action_t
      * @flags CREATE_AND_SET
-     * @default SAI_PACKET_ACTION_TRAP
+     * @default SAI_PACKET_ACTION_FORWARD
      */
     SAI_SWITCH_ATTR_FDB_BROADCAST_MISS_PACKET_ACTION,
 
@@ -931,7 +966,7 @@ typedef enum _sai_switch_attr_t
      *
      * @type sai_packet_action_t
      * @flags CREATE_AND_SET
-     * @default SAI_PACKET_ACTION_TRAP
+     * @default SAI_PACKET_ACTION_FORWARD
      */
     SAI_SWITCH_ATTR_FDB_MULTICAST_MISS_PACKET_ACTION,
 
@@ -1473,6 +1508,26 @@ typedef enum _sai_switch_attr_t
      * @flags READ_ONLY
      */
     SAI_SWITCH_ATTR_SUPPORTED_PROTECTED_OBJECT_TYPE,
+
+    /**
+     * @brief TPID for Outer vlan id
+     *
+     * @type sai_uint16_t
+     * @flags CREATE_AND_SET
+     * @isvlan false
+     * @default 0x88A8
+     */
+    SAI_SWITCH_ATTR_TPID_OUTER_VLAN,
+
+    /**
+     * @brief TPID for Inner vlan id
+     *
+     * @type sai_uint16_t
+     * @flags CREATE_AND_SET
+     * @isvlan false
+     * @default 0x8100
+     */
+    SAI_SWITCH_ATTR_TPID_INNER_VLAN,
 
     /**
      * @brief End of attributes
