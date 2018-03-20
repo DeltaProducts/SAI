@@ -736,7 +736,7 @@ typedef enum _sai_switch_attr_t
     /**
      * @brief Available ACL Tables
      *
-     * @type sai_uint32_t
+     * @type sai_acl_resource_list_t
      * @flags READ_ONLY
      */
     SAI_SWITCH_ATTR_AVAILABLE_ACL_TABLE,
@@ -744,7 +744,7 @@ typedef enum _sai_switch_attr_t
     /**
      * @brief Available ACL Table groups
      *
-     * @type sai_uint32_t
+     * @type sai_acl_resource_list_t
      * @flags READ_ONLY
      */
     SAI_SWITCH_ATTR_AVAILABLE_ACL_TABLE_GROUP,
@@ -1528,6 +1528,122 @@ typedef enum _sai_switch_attr_t
      * @default 0x8100
      */
     SAI_SWITCH_ATTR_TPID_INNER_VLAN,
+
+    /**
+     * @brief Perform CRC check
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     * @default true
+     */
+    SAI_SWITCH_ATTR_CRC_CHECK_ENABLE,
+
+    /**
+     * @brief Perform CRC recalculation (overwriting CRC value on egress)
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     * @default true
+     */
+    SAI_SWITCH_ATTR_CRC_RECALCULATION_ENABLE,
+
+    /**
+     * @brief Set Switch BFD session state change event notification callback function passed to the adapter.
+     *
+     * Use sai_bfd_session_state_change_notification_fn as notification function.
+     *
+     * @type sai_pointer_t sai_bfd_session_state_change_notification_fn
+     * @flags CREATE_AND_SET
+     * @default NULL
+     */
+    SAI_SWITCH_ATTR_BFD_SESSION_STATE_CHANGE_NOTIFY,
+
+    /**
+     * @brief Number of BFD session in the NPU
+     *
+     * @type sai_uint32_t
+     * @flags READ_ONLY
+     */
+    SAI_SWITCH_ATTR_NUMBER_OF_BFD_SESSION,
+
+    /**
+     * @brief Max number of BFD session NPU supports
+     *
+     * @type sai_uint32_t
+     * @flags READ_ONLY
+     */
+    SAI_SWITCH_ATTR_MAX_BFD_SESSION,
+
+    /**
+     * @brief Minimum Receive interval NPU supports in microseconds
+     *
+     * @type sai_uint32_t
+     * @flags READ_ONLY
+     */
+    SAI_SWITCH_ATTR_MIN_BFD_RX,
+
+    /**
+     * @brief Minimum Transmit interval NPU supports in microseconds
+     *
+     * @type sai_uint32_t
+     * @flags READ_ONLY
+     */
+    SAI_SWITCH_ATTR_MIN_BFD_TX,
+
+    /**
+     * @brief Apply ECN thresholds for ECT traffic.
+     *        Attribute controls whether ECT traffic needs to subjected to WRED
+     *        thresholds or be subjected to ECN thresholds.
+     *
+     * @type bool
+     * @flags CREATE_AND_SET
+     * @default false
+     */
+    SAI_SWITCH_ATTR_ECN_ECT_THRESHOLD_ENABLE,
+
+    /**
+     * @brief Default VXLAN router MAC (inner destination MAC for VXLAN encapsulation)
+     *
+     * @type sai_mac_t
+     * @flags CREATE_AND_SET
+     * @default vendor
+     */
+    SAI_SWITCH_ATTR_VXLAN_DEFAULT_ROUTER_MAC,
+
+    /**
+     * @brief Default VXLAN destination UDP port
+     *
+     * @type sai_uint16_t
+     * @flags CREATE_AND_SET
+     * @isvlan false
+     * @default 4789
+     */
+    SAI_SWITCH_ATTR_VXLAN_DEFAULT_PORT,
+
+    /**
+     * @brief Max number of mirror session NPU supports
+     *
+     * @type sai_uint32_t
+     * @flags READ_ONLY
+     */
+    SAI_SWITCH_ATTR_MAX_MIRROR_SESSION,
+
+    /**
+     * @brief Max number of sampled mirror session NPU supports
+     *
+     * @type sai_uint32_t
+     * @flags READ_ONLY
+     */
+    SAI_SWITCH_ATTR_MAX_SAMPLED_MIRROR_SESSION,
+
+    /**
+     * @brief Get the list of supported get statistics extended modes
+     *        Empty list should be returned if get statistics extended is not supported at all
+     *
+     * @type sai_s32_list_t sai_stats_mode_t
+     * @flags READ_ONLY
+     */
+    SAI_SWITCH_ATTR_SUPPORTED_EXTENDED_STATS_MODE,
 
     /**
      * @brief End of attributes
